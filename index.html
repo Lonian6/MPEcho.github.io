@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION - AUTHOR_NAMES">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="A melody- and phoneme-aware framework for controllable cover song generation that adds explicit phoneme conditioning to reduce phoneme error rate.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="Cover Song Generation, Lyrics-to-Song, Lyrics Alignment, MIR, AI">
+  <meta name="author" content="Wei-Jaw Lee, Hsuan-Yu Yeh, Ting-Yi Hu, Chih-Pin Tan, Fang-Duo Tsai, Yi-Hsuan Yang">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="National Taiwan University - Music and AI Lab">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="A melody- and phoneme-aware framework for controllable cover song generation that adds explicit phoneme conditioning to reduce phoneme error rate.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://lonian6.github.io/MPEcho.github.io/">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://lonian6.github.io/MPEcho.github.io/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Wei-Jaw Lee">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="KEYWORD1">
+  <meta property="article:tag" content="KEYWORD2">
+
+  <!-- Twitter -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <!-- <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE"> -->
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <!-- <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE"> -->
+  <!-- TODO: Same as paper title above -->
+  <!-- <meta name="twitter:title" content="MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION"> -->
+  <!-- TODO: Same as description above -->
+  <!-- <meta name="twitter:description" content="A melody- and phoneme-aware framework for controllable cover song generation that adds explicit phoneme conditioning to reduce phoneme error rate."> -->
+  <!-- TODO: Same as social preview image above -->
+  <!-- <meta name="twitter:image" content="https://lonian6.github.io/MPEcho.github.io/static/images/social_preview.png"> -->
+  <!-- <meta name="twitter:image:alt" content="MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION - Research Preview"> -->
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION">
+  <meta name="citation_author" content="Lee, Wei-Jaw">
+  <meta name="citation_author" content="Yeh, Hsuan-Yu">
+  <meta name="citation_author" content="Hu, Ting-Yi">
+  <meta name="citation_author" content="Tan, Chih-Pin">
+  <meta name="citation_author" content="Tsai, Fang-Duo">
+  <meta name="citation_author" content="Yang, Yi-Hsuan">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="ISMIR">
+  <meta name="citation_pdf_url" content="https://lonian6.github.io/MPEcho.github.io/static/pdfs/paper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION - AUTHOR_NAMES | Academic Research</title>
+  
+  <!-- Favicon and App Icons -->
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico"> -->
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION",
+    "description": "A melody- and phoneme-aware framework for controllable cover song generation that adds explicit phoneme conditioning to reduce phoneme error rate.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Wei-Jaw Lee",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "National Taiwan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Hsuan-Yu Yeh",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "National Taiwan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Ting-Yi Hu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "National Taiwan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Chih-Pin Tan",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "National Taiwan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Fang-Duo Tsai",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "National Taiwan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Yi-Hsuan Yang",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "National Taiwan University"
+        }
+      }
+    ],
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    "url": "https://lonian6.github.io/MPEcho.github.io/",
+    "image": "https://lonian6.github.io/MPEcho.github.io/static/images/social_preview.png",
+    "keywords": ["CoverSong", "Lyrics-to-Song", "Music Generation"],
+    "abstract": "FULL_ABSTRACT_TEXT_HERE",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://lonian6.github.io/MPEcho.github.io/"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing", 
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "National Taiwan University - Music and AI Lab",
+    "url": "https://affige.github.io/lab.html",
+    "logo": "https://lonian6.github.io/MPEcho.github.io/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title">MPECHO: A MELODY AND PHONEME-AWARE GENERATIVE FRAMEWORK FOR CONTROLLABLE COVER SONG GENERATION</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Add personal links for each author -->
+              <span class="author-block"><a href="https://lonian6.github.io/" target="_blank">Wei-Jaw Lee</a><sup>1, 2</sup>,</span>
+              <span class="author-block">Hsuan-Yu Yeh<sup>1, 2</sup>,</span>
+              <span class="author-block">Ting-Yi Hu<sup>1</sup>,</span>
+              <span class="author-block"><a href="https://tanchihpin0517.github.io/" target="_blank">Chih-Pin Tan</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://fundwotsai2001.github.io/mywebsite/" target="_blank">Fang-Duo Tsai</a><sup>1, 2</sup>,</span>
+              <span class="author-block"><a href="https://affige.github.io/" target="_blank">Yi-Hsuan Yang</a><sup>1</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>National Taiwan University, <sup>2</sup>Taiwan AI Labs<br>ISMIR 2026</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                    <!-- Arxiv PDF link -->
+                
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- HF link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/YOUR_MODEL_HERE" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fa-brands fa-hugging-face"></i>
+                  </span>
+                  <span>HF</span>
+                  </a>
+                </span>
+
+                
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Cover song generation (CSG) should preserve the melodic and linguistic content of a reference song while recreating the remaining musical components. The state-of-the-art model SongEcho utilizes F0 sequences and voiced/unvoiced (V/UV) tags for conditioning; however, implicit linguistic information from V/UV tags cannot guarantee lyric accuracy, leading to a high phoneme error rate (PER). Inspired by singing voice synthesis (SVS), we propose MPEcho, which integrates a phoneme encoder and a length regulator (LR) into the SongEcho framework. By providing explicit phoneme-level conditioning and precise temporal boundaries, MPEcho significantly reduces PER. To enable this, we developed Phonsa, a Whisper-based automatic transcription model that provides high precision phoneme-level annotations for singing voices, overcoming the scarcity of high-quality audio-phoneme pairs. Experimental results validate the effectiveness of Phonsa for alignment and MPEcho for end-to-end CSG.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+    <!-- Audio table -->
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered has-text-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Audio Samples Demo</h2>
+                        <div class="content has-text-justified">
+                        <!-- TODO: Replace with your paper abstract -->
+                        <p>
+                            This section shows a gt audio and the generated audio samples by the models reported in Table 4 in the paper.
+                            The model ID 1, 2, 3 are trained with M (melody) condition, P (phoneme) condition and M+P conditions respectively.
+                            The model ID 9 is the same model with ID 3 but use multi-condition guidance.
+                        </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <h2 class="title is-3"></h2> -->
+                <!-- We provide a set of audio sample with their mel spectrograms for quantitative comparison.
+                All the samples are generated from the same text prompt:<br> -->
+                
+                <div class="table-container">
+                    <table class="table is-bordered is-striped is-fullwidth audio-table" style="vertical-align: middle;">
+                        <thead>
+                        <tr>
+                            <th style="min-width:240px;">Text Prompt</th>
+                            <th style="min-width:240px;">Lyrics</th>
+                            <th>GT</th>
+                            <th>ID: 1</th>
+                            <th>ID: 2</th>
+                            <th>ID: 3</th>
+                            <th>ID: 9</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr>
+                                <td class="prompt-cell">
+                                  slap bass, rhythmic, brass, soulful, upbeat, tight, funk
+                                </td>
+                                <td class="prompt-cell">
+                                  從今後就選擇沉默<br>
+                                  選擇服從歲月如梭
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/000_prompt.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/000_melody-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/000_phoneme-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/000_all-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/000_all.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+                            </tr>
+                            
+                            <!-- Row 2 -->
+                            <tr>
+                                <td class="prompt-cell">
+                                  bright, happy, pop, acoustic guitar, melodic, radio-friendly, clean vocals
+                                </td>
+                                <td class="prompt-cell">
+                                  若非愛的天才 還能不能盼未來<br>
+                                  一點愛 就能讓地裂天開<br>
+                                  能讓我 把傷感重新掩埋<br>
+                                  等你吹散陰霾 活出我的神采
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/002_prompt.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/002_melody-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/002_phoneme-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/002_all-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/002_all.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr>
+                                <td class="prompt-cell">
+                                  soul, emotional, keyboard, grooving, romantic, soft, r&b
+                                </td>
+                                <td class="prompt-cell">
+                                  她的表情會變的有點怪怪<br>
+                                  可是我還是不明白<br>
+                                  為什麼她不理不睬<br>
+                                  難道要老土的說一聲<br>
+                                  對面的女孩看過來<br>
+                                  對面的女孩看過來<br>
+                                  Won't you just give me a try
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/003_prompt.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/003_melody-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/003_phoneme-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/003_all-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/003_all.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+                            </tr>
+
+                            <!-- Row 4 -->
+                            <tr>
+                                <td class="prompt-cell">
+                                  nylon guitar, festive, congas, rhythmic, passionate, dance, latin
+                                </td>
+                                <td class="prompt-cell">
+                                  我的手你的臉越分越開<br>
+                                  記得溫度記得幸福人才能釋懷<br>
+                                  如果快樂你忘了帶<br>
+                                  想想我們相愛的平凡<br>
+                                  那種快樂那種執著<br>
+                                  我相信誰都不能取代
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/005_prompt.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/005_melody-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/005_phoneme-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/005_all-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/005_all.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+                            </tr>
+
+                            <!-- Row 5 -->
+                            <tr>
+                                <td class="prompt-cell">
+                                  fuzzy guitar, moody, heavy, 90s style, grunge
+                                </td>
+                                <td class="prompt-cell">
+                                  我需要一個擁抱<br>
+                                  如果你在身邊 就好<br>
+                                  我需要一個訊號<br>
+                                  是你想念有我的座標<br>
+                                  把地圖縮得再小<br>
+                                  也不能抵擋難相見的煎熬<br>
+                                  我知道我們很好<br>
+                                  不會被距離 打倒
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/009_prompt.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/009_melody-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/009_phoneme-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/009_all-se.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                  <audio controls preload="none">
+                                      <source src="static/audio/009_all.mp3" type="audio/mp3">
+                                  </audio>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End audio table -->
+
+
+
+
+
+
+
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
